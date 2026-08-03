@@ -12,7 +12,7 @@ export const CourseCard = ({data}) => {
             <p className='text-amber-800'>CREATE CODE CONQURE</p>
             <div className='flex flex-col gap-5'>
                 <h1 className='text-3xl'>{obj.title}</h1>
-                <p className='text-[#ffffff71]'>{obj.description}</p>
+                <p className='text-[#852a2ab0]'>{obj.description}</p>
             </div>
             <div>
                 <h2 className='text-amber-300'>Price: {obj.price}</h2>
