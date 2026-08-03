@@ -23,7 +23,7 @@ export default function ContactForm () {
                 <h1 className='text-4xl md:text-4xl font-bold text-center mb-4'>{title}</h1>
                 <h2 className='text-xl md:text-2xl text-center text-gray-600'>{subtitle}</h2>
             </div>
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-md border border-[#8080802f] rounded-lg p-6 bg-transparent">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-md border border-[#163ed973] rounded-lg p-6 bg-transparent">
       <div className="flex flex-col gap-2">
         <label className="text-sm text-gray-400">Name</label>
         <input
