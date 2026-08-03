@@ -9,11 +9,13 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@iconify-json/lucide": "^1.2.121",
     "next": "16.2.12",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@iconify/tailwind4": "^1.2.3",
     "@tailwindcss/postcss": "^4",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
