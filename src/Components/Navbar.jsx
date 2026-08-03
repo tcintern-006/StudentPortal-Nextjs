@@ -37,7 +37,7 @@ export const Navbar = () => {
         ></div>
       )}
 
-      <aside className={`${isMenuOpen ? 'left-0' : '-left-full'} z-[90] md:left-0 bg-white md:bg-white/90 backdrop-blur-md px-8 transition-all duration-300 fixed h-screen border-r border-[#e5e5e5] flex flex-col gap-5 pt-4 items-center md:w-[16%]`}>
+      <aside className={`${isMenuOpen ? 'left-0' : '-left-full'} z-[90] md:left-0 bg-white md:bg-white/90 backdrop-blur-md px-8 transition-all duration-300 fixed h-screen border-r border-[#3123c170] flex flex-col gap-5 pt-4 items-center md:w-[16%]`}>
 
         <div className="flex justify-center items-center gap-2 logo border-b border-[#e5e5e5] p-4">
           <span className="icon-[lucide--graduation-cap] h-5 w-5"></span>
