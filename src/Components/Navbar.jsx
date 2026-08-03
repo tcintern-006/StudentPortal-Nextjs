@@ -17,7 +17,7 @@ export const Navbar = () => {
       <div className="search w-screen flex gap-3">
         <div className='absolute top-5 left-1/2 -translate-x-1/2 md:pl-[16%] md:w-[70%]'>
           <input
-            className='w-full p-2 border border-[#e5e5e5] outline-0 px-5 ring-1 ring-[#a8a8d649] bg-white'
+            className='w-full p-2 border border-[#3123c170] outline-0 px-5 ring-1 ring-[#a8a8d649] bg-white'
             type="text"
             placeholder='Search courses , instructors...'
           />
@@ -39,7 +39,7 @@ export const Navbar = () => {
 
       <aside className={`${isMenuOpen ? 'left-0' : '-left-full'} z-[90] md:left-0 bg-white md:bg-white/90 backdrop-blur-md px-8 transition-all duration-300 fixed h-screen border-r border-[#3123c170] flex flex-col gap-5 pt-4 items-center md:w-[16%]`}>
 
-        <div className="flex justify-center items-center gap-2 logo border-b border-[#e5e5e5] p-4">
+        <div className="flex justify-center items-center gap-2 logo border-b border-[#3123c170] p-4">
           <span className="icon-[lucide--graduation-cap] h-5 w-5"></span>
           <h1 className="text-[#171717]">.Code</h1>
         </div>
@@ -53,12 +53,12 @@ export const Navbar = () => {
           ))}
         </ul>
 
-        <div className="sign-in flex justify-center items-center border-t border-[#e5e5e5] p-4">
+        <div className="sign-in flex justify-center items-center border-t border-[#3123c170] p-4">
           <ButtonComp text={btnText} />
         </div>
 
         <div className="socials">
-          <ul className='border-t border-[#e5e5e5] p-4 flex flex-col gap-5'>
+          <ul className='border-t border-[#3123c170] p-4 flex flex-col gap-5'>
             {socials.map((elem, idx) => (
               <li className='flex gap-3 text-[#171717]' key={idx}>
                 <span className={elem.iconClass}></span>
