@@ -5,7 +5,8 @@ import { ButtonComp } from './ButtonComp';
 
 export const CourseCard = ({data}) => {
     const obj = data;
-    console.log(data)
+
+    
   return (
     <div className='flex flex-col justify-center items-center gap-3 '>
         <div className="left  w-[50%] flex flex-col gap-5">
@@ -24,7 +25,7 @@ export const CourseCard = ({data}) => {
         </div>
         <div className="right flex  flex-col gap-3 border-2 w-[50%] border-[#8080802f] rounded-lg p-4">
             <div className="">
-                <Image className='rounded-lg' src={obj.img} />
+              <Image className='rounded-lg' src={obj.img} alt={obj.title} width={400} height={300} />
             </div>
             <div className="bubbles">
                    { obj.bubbles.map((e , idx )=>{
