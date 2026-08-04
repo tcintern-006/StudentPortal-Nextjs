@@ -5,7 +5,7 @@ import { SectionTitle } from '@/Components/SectionTitle';
 
 
 export default function ContactForm () {
-  const {title ,subtitle } = contactData;
+  const {title ,subtitle , description} = contactData;
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   function handleChange(e) {
