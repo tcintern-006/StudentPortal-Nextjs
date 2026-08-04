@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { contactData } from '../Assets/data';
+import { SectionTitle } from '@/Components/SectionTitle';
 
 
 export default function ContactForm () {
@@ -19,10 +20,8 @@ export default function ContactForm () {
   return (
     <section className='hero-glow min-h-screen overflow-hidden   px-8  pt-28 md:pt-25  flex flex-col gap-6  items-center justify-center font-sans md:pl-[18%]'>
 
-      <div className='w-[70%]'>
-                <h1 className='text-4xl md:text-4xl font-bold text-center mb-4'>{title}</h1>
-                <h2 className='text-xl md:text-2xl text-center text-gray-600'>{subtitle}</h2>
-            </div>
+    <SectionTitle title = {title} description = {description} />
+
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-md border border-[#163ed973] rounded-lg p-6 bg-transparent">
       <div className="flex flex-col gap-2">
         <label className="text-sm text-gray-400">Name</label>
