@@ -3,26 +3,39 @@
 
 :root {
   --background: #ffffff;
+  --background-secondary: #c4aea8b4;
   --foreground: #171717;
-  --surface: #ffffff;
-  --muted: #6b6b6b;
-  --accent: #7f22fe;
+  --foreground-muted: #6b6b6f;
+  --border: #e5e5e5;
+   --border-subtle: #eeeeee;
+  --accent: #7F22FE;
+  --accent-hover: #6b1fd6;
+  --card-bg: #ffffff;
+  --card-hover-border: #7F22FE80;
+
 }
 
 .dark {
-  --background: #0a0a0c;
-  --foreground: #ededed;
-  --surface: #16161a;
-  --muted: #a1a1a1;
-  --accent: #a855f7;
+  --background: #09090b;
+  --background-secondary: #0f0f12;
+  --foreground: #f5f5f5;
+  --foreground-muted: #a1a1aa;
+  --border: #27272a;
+  --border-subtle: #1f1f23;
+   --card-bg: #101014;
+  --card-hover-border: #a855f780;
+   --accent: #a855f7;
+  --accent-hover: #c084fc;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-muted: var(--muted);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
 }
 
 

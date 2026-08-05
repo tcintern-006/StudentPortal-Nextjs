@@ -1,11 +1,22 @@
 import Image from "next/image";
-import { homeData } from "./Assets/data";
+import { coursesData, homeData } from "./Assets/data";
 import { ButtonComp } from "@/Components/ButtonComp";
+import { FeatureCards } from "@/Components/FeatureCards";
 
 export default function Home() {
+
+  const data = coursesData.courses;
+  const featureData = data.filter((e)=>  e.feature == true);
+ 
+
+
+
+
   const { title, description, btn, btnDesc, logos, HeroImage, logoText } = homeData;
   return (
-    <section className="hero-glow  px-8  pt-20 md:pt-2 flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
+    <>
+    
+    <section className=" min-h-screen bg-background text-foreground px-8  pt-24 md:pt-2 flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
       <div className="main flex relative ">
         <div className="text md:w-[50%] flex flex-col items-start justify-center text-start gap-4">
           <h1 className="text-4xl">{title}</h1>
@@ -26,7 +37,7 @@ export default function Home() {
 
 
 
-      <div className="Customerslogos mt-10 flex flex-col items-center justify-center gap-4">
+      <div className="Customerslogos bg-background-secondary mt-10  py-3 px-4 rounded-lg flex flex-col items-center justify-center gap-4">
         <div className="">
           <p>{logoText}</p>
         </div>
@@ -44,6 +55,9 @@ export default function Home() {
         }
          </div>
       </div>
+
     </section>
+      <FeatureCards  feature = {featureData}/>
+    </>
   );
 }

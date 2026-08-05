@@ -4,10 +4,12 @@ import React from 'react'
 import Image from 'next/image';
 import { ButtonComp } from './ButtonComp';
 import Link from 'next/link';
-export const Cards = () => {
-    const { courses } = coursesData;
-
-
+export const Cards = ({filter}) => {
+    let  { courses } = coursesData;
+    if(filter){
+        courses = filter;
+    }
+     
 
     return (
         <div className='grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 overflow-hidden'>

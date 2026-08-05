@@ -63,6 +63,7 @@ export const coursesData = {
             orignalPrice: "500",
             btn1: "Buy Now",
             btn2: "Learn More",
+            feature:  true,
         },
         {
             slug: "data-science",
@@ -76,6 +77,7 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
+                feature:  false,
         },
         {
             slug: "data-analytics",
@@ -89,6 +91,7 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
+             feature:  false,
         },
         {
             slug: "mern-stack",
@@ -102,6 +105,7 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
+             feature:  false,
         },
         {
             slug: "dsa",
@@ -115,6 +119,8 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
+               feature:  true,
+               
         },
     ]
 }
@@ -193,4 +199,10 @@ export const AboutUsData = {
 export const contactData = {
   title: "Get In Touch",
   subtitle: "Have a question about a course or need help getting started? We'd love to hear from you.",
+}
+
+
+export const featureHead = {
+  title: "Featured Courses",
+  subtitle: "Explore our top-rated courses designed to boost your skills and career.",
 }
