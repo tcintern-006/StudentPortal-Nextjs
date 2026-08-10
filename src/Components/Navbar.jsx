@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { coursesData, navbarData } from '@/app/Assets/data'
 import { ButtonComp } from './ButtonComp'
 import Link from 'next/link'
@@ -8,12 +8,23 @@ export const Navbar = () => {
   const { links, btnText, socials } = navbarData
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputData, setInputData] = useState("");
+  const [courses , setCourses] = useState([]);
 
-  const { courses } = coursesData;
+  
+  useEffect (()=>{
+
+    async function getallCourses() {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+          let {allCourses} =  await res.json();
+          setCourses(allCourses)
+
+    }
+    getallCourses();
+  },[])
 
   const filterdData = inputData ? courses.filter((elem) => elem.title.toLocaleLowerCase().includes(inputData.toLowerCase())) : []
 
-  console.log(filterdData)
+
 
 
   function handleClick() {
@@ -38,7 +49,7 @@ export const Navbar = () => {
               <div className="searching  w-full mt-1 border-2 bg-white shadow-lg z-40 gap-2 flex flex-col border-border py-1 px-2 text-center rounded-md ">
                 {filterdData.length > 0 ? (
                   filterdData.map((e, idx) => (
-                    <Link  href={`/courses/${e.slug}`} key={idx} className= "text-foreground-muted border-border border py-1 px-2 text-sm rounded hover:bg-background-secondary">{e.title}</Link>
+                    <Link  href={`/courses/${e.id}`} key={idx} className= "text-foreground-muted border-border border py-1 px-2 text-sm rounded hover:bg-background-secondary">{e.title}</Link>
                   ))
                 ) : (
                   <p className='text-foreground-muted text-sm'>No courses found.</p>

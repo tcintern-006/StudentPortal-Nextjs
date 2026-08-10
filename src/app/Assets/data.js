@@ -52,7 +52,7 @@ export const coursesData = {
     description: "Level Up Your Coding Skills with Expert-Led Courses",
     courses: [
         {
-            slug: "web-development",
+            id: 1,
             title: "3.0 Job Ready AI Powered Cohort",
             bubbles: ["Product Branding", "Community Access", "Job Ready"],
             description: "Become a full-stack web developer! Learn to build dynamic web applications using the MERN stack, with hands-on projects and expert guidance.",
@@ -63,10 +63,10 @@ export const coursesData = {
             orignalPrice: "500",
             btn1: "Buy Now",
             btn2: "Learn More",
-            feature:  true,
+            feature: true,
         },
         {
-            slug: "data-science",
+            id: 2,
             title: "Data Science and Analytics with GenAI",
             bubbles: ["Machine Learning", "Deep Learning", "Gen-Ai"],
             description: "Unlock the power of data science! Learn to analyze and visualize data using Python, SQL, and Tableau, with real-world projects and expert guidance.",
@@ -77,10 +77,10 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
-                feature:  false,
+            feature: false,
         },
         {
-            slug: "data-analytics",
+            id: 3,
             title: "Complete Data Analytics",
             bubbles: ["AI", "Data-Analysis", "Python"],
             description: "Master data analytics! Learn to analyze and visualize data using Python, SQL, and Tableau, with real-world projects and expert guidance.",
@@ -91,10 +91,10 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
-             feature:  false,
+            feature: false,
         },
         {
-            slug: "mern-stack",
+            id: 4,
             title: "2.0 Job Ready AI Powered Cohort",
             description: "Become a full-stack web developer! Learn to build dynamic web applications using the MERN stack, with hands-on projects and expert guidance.",
             bubbles: ["MERN Stack", "DSA with JS", "Job Ready"],
@@ -105,10 +105,10 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
-             feature:  false,
+            feature: false,
         },
         {
-            slug: "dsa",
+            id: 5,
             title: "DSA Domination",
             description: "Ace your coding interviews! Master Java and DSA with our expert-led course, packed with interactive lessons and practice tests.",
             bubbles: ["Deep Learning", "Logic Bulding", "JAVA"],
@@ -119,8 +119,8 @@ export const coursesData = {
             orignalPrice: "$500",
             btn1: "Buy Now",
             btn2: "Learn More",
-               feature:  true,
-               
+            feature: true,
+
         },
     ]
 }
@@ -134,10 +134,10 @@ export const instructorsData = {
     description: "Learn from industry professionals with real-world experience.",
     instructors: [
         {
-            slug: "ahmed-raza",
+            id: "",
             name: "Ahmed Raza",
             role: "Senior Full-Stack Developer",
-            pic: img1, 
+            pic: img1,
             bio: "5+ years building production web apps with React and Node.js. Previously worked at a fintech startup scaling to 1M+ users.",
             expertise: ["React", "Node.js", "MongoDB"],
             experience: "5+ Years",
@@ -150,7 +150,7 @@ export const instructorsData = {
             }
         },
         {
-            slug: "sara-khan",
+            id: "",
             name: "Sara Khan",
             role: "AI/ML Engineer",
             pic: img2,
@@ -166,7 +166,7 @@ export const instructorsData = {
             }
         },
         {
-            slug: "bilal-ahmed",
+            id: "",
             name: "Bilal Ahmed",
             role: "DevOps & Cloud Architect",
             pic: img3,
@@ -197,12 +197,12 @@ export const AboutUsData = {
 // Contact data
 
 export const contactData = {
-  title: "Get In Touch",
-  subtitle: "Have a question about a course or need help getting started? We'd love to hear from you.",
+    title: "Get In Touch",
+    subtitle: "Have a question about a course or need help getting started? We'd love to hear from you.",
 }
 
 
 export const featureHead = {
-  title: "Featured Courses",
-  subtitle: "Explore our top-rated courses designed to boost your skills and career.",
+    title: "Featured Courses",
+    subtitle: "Explore our top-rated courses designed to boost your skills and career.",
 }

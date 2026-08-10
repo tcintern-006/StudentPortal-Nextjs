@@ -30,7 +30,7 @@ export const CourseCard = ({data}) => {
             <div className="bubbles">
                    { obj.bubbles.map((e , idx )=>{
                                         return (
-                                            <span key={idx}  className='border border-[#8080808e] text-[0.6rem] rounded-lg p-1 w-full'key={idx}>{e}</span>
+                                            <span key={idx}  className='border border-[#8080808e] text-[0.6rem] rounded-lg p-1 w-full' >{e}</span>
                                         )
                                     })}
             </div>
