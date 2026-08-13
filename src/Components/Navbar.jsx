@@ -4,6 +4,7 @@ import { coursesData, navbarData } from '@/app/Assets/data'
 import { ButtonComp } from './ButtonComp'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { getToken, removeToken } from '@/app/utils/auth'
 
 export const Navbar = () => {
   const { links, btnText, socials } = navbarData
@@ -27,11 +28,18 @@ export const Navbar = () => {
 
   useEffect(() => {
     async function checkAuth() {
+      const token = getToken();
+      if (!token) {
+        setIsLoggedIn(false);
+        setCheckingAuth(false);
+        return;
+      }
       try {
         const res = await fetch(`${AUTH_URL}/profile`, {
-          credentials: 'include',
+          headers: { Authorization: `Bearer ${token}` }
         });
         setIsLoggedIn(res.ok);
+        if (!res.ok) removeToken();
       } catch (err) {
         console.log(err);
         setIsLoggedIn(false);
@@ -44,15 +52,18 @@ export const Navbar = () => {
 
   async function handleLogout() {
     try {
+      const token = getToken();
       await fetch(`${AUTH_URL}/logout`, {
         method: "GET",
-        credentials: 'include',
+        headers: { Authorization: `Bearer ${token}` }
       });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      removeToken();
       setIsLoggedIn(false);
       router.push("/");
       router.refresh();
-    } catch (err) {
-      console.log(err);
     }
   }
 
