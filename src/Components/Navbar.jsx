@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { coursesData, navbarData } from '@/app/Assets/data'
 import { ButtonComp } from './ButtonComp'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { getToken, setToken, removeToken } from "@/Components/auth";
+import { useRouter, usePathname } from 'next/navigation'
+import { getToken, removeToken } from '@/Components/auth'
 
 export const Navbar = () => {
   const { links, btnText, socials } = navbarData
   const router = useRouter();
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputData, setInputData] = useState("");
   const [courses, setCourses] = useState([]);
@@ -48,7 +49,7 @@ export const Navbar = () => {
       }
     }
     checkAuth();
-  }, [])
+  }, [pathname])
 
   async function handleLogout() {
     try {
