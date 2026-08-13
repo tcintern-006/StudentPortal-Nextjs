@@ -2,9 +2,25 @@ import React from 'react'
 import Image from 'next/image'
 import { instructorsData } from '@/app/Assets/data'
 
-export const ProfileCards = () => {
-    const { instructors } = instructorsData;
 
+async function getData() {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instructors`)
+    const res =await data.json();
+    console.log("api data" , res)
+    return res.instructors || [];
+}
+
+
+ export  const  ProfileCards = async () => {
+    const  instructors  = await getData();
+
+    if (instructors.length === 0) {
+        return (
+            <div className="flex items-center justify-center py-20">
+                <p className="text-gray-400 text-lg">No instructors found right now.</p>
+            </div>
+        );
+    }
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
 
@@ -19,7 +35,7 @@ export const ProfileCards = () => {
                                 <p className="text-sm text-[#7F22FE]">{elem.role}</p>
                                 <p className="text-sm text-gray-400">{elem.bio}</p>
                                 <div className="flex flex-wrap gap-2 mt-1">
-                                    {elem.expertise.map((e, i) => (
+                                    {elem.expertise?.map((e, i) => (
                                         <span key={i} className="border border-[#8080808e] text-xs rounded-full px-3 py-1 whitespace-nowrap">
                                             {e}
                                         </span>

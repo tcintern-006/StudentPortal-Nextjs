@@ -9,7 +9,7 @@ export const AddCourse = ({onCourseAdded }) => {
         title: "",
         description: "",
         price: "",
-        originalPrice: "",
+        original_price: "",
         off: "",
         img: "",
         bubbles: "", 
@@ -38,7 +38,7 @@ export const AddCourse = ({onCourseAdded }) => {
             const payload = {
                 ...formData,
                 price: Number(formData.price),
-                originalPrice: Number(formData.originalPrice),
+                original_price: Number(formData.original_price),
                 bubbles: formData.bubbles
                     .split(",")
                     .map((b) => b.trim())
@@ -61,7 +61,7 @@ export const AddCourse = ({onCourseAdded }) => {
                 title: "",
                 description: "",
                 price: "",
-                originalPrice: "",
+                original_price: "",
                 off: "",
                 img: "",
                 bubbles: "",
@@ -130,8 +130,8 @@ export const AddCourse = ({onCourseAdded }) => {
                     <label className='text-sm text-gray-600'>Original Price ($)</label>
                     <input
                         type="number"
-                        name="originalPrice"
-                        value={formData.originalPrice}
+                        name="original_price"
+                        value={formData.original_price}
                         onChange={handleChange}
                         className='p-2 border border-[#3123c170] rounded-md outline-0 ring-1 ring-[#a8a8d649] focus:ring-[#7F22FE]'
                         placeholder='400'

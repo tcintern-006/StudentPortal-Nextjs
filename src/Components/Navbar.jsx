@@ -3,29 +3,60 @@ import React, { useEffect, useState } from 'react'
 import { coursesData, navbarData } from '@/app/Assets/data'
 import { ButtonComp } from './ButtonComp'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export const Navbar = () => {
   const { links, btnText, socials } = navbarData
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputData, setInputData] = useState("");
-  const [courses , setCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
-  
-  useEffect (()=>{
+  const AUTH_URL = process.env.NEXT_PUBLIC_API_URL;
 
+  useEffect(() => {
     async function getallCourses() {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
-          let {allCourses} =  await res.json();
-          setCourses(allCourses)
-
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`);
+      let { allCourses } = await res.json();
+      setCourses(allCourses)
     }
     getallCourses();
-  },[])
+  }, [])
+
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${AUTH_URL}/profile`, {
+          credentials: 'include',
+        });
+        setIsLoggedIn(res.ok);
+      } catch (err) {
+        console.log(err);
+        setIsLoggedIn(false);
+      } finally {
+        setCheckingAuth(false);
+      }
+    }
+    checkAuth();
+  }, [])
+
+  async function handleLogout() {
+    try {
+      await fetch(`${AUTH_URL}/logout`, {
+        method: "GET",
+        credentials: 'include',
+      });
+      setIsLoggedIn(false);
+      router.push("/");
+      router.refresh();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const filterdData = inputData ? courses.filter((elem) => elem.title.toLocaleLowerCase().includes(inputData.toLowerCase())) : []
-
-
-
 
   function handleClick() {
     setIsMenuOpen(!isMenuOpen);
@@ -45,16 +76,14 @@ export const Navbar = () => {
 
           {
             inputData && (
-
               <div className="searching  w-full mt-1 border-2 bg-white shadow-lg z-40 gap-2 flex flex-col border-border py-1 px-2 text-center rounded-md ">
                 {filterdData.length > 0 ? (
                   filterdData.map((e, idx) => (
-                    <Link  href={`/courses/${e.id}`} key={idx} className= "text-foreground-muted border-border border py-1 px-2 text-sm rounded hover:bg-background-secondary">{e.title}</Link>
+                    <Link href={`/courses/${e.id}`} key={idx} className="text-foreground-muted border-border border py-1 px-2 text-sm rounded hover:bg-background-secondary">{e.title}</Link>
                   ))
                 ) : (
                   <p className='text-foreground-muted text-sm'>No courses found.</p>
                 )}
-
               </div>
             )
           }
@@ -90,8 +119,15 @@ export const Navbar = () => {
           ))}
         </ul>
 
-        <div className="sign-in flex justify-center items-center border-t border-[#3123c170] p-4">
-          <ButtonComp text={btnText} />
+        <div className="sign-in flex flex-col justify-center gap-3 items-center border-t border-[#3123c170] p-4">
+          {checkingAuth ? null : isLoggedIn ? (
+            <ButtonComp text="Logout" onClick={handleLogout} />
+          ) : (
+            <>
+              <ButtonComp text={btnText} href='/login' />
+              <ButtonComp text='Signup' href='/register' />
+            </>
+          )}
         </div>
 
         <div className="socials">
