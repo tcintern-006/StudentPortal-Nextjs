@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import { getToken, setToken, removeToken } from "@/app/utils/auth";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -18,14 +18,20 @@ export default function LoginPage() {
 
     useEffect(() => {
         async function verifyToken() {
+            const token = getToken();
+            if (!token) {
+                setCheckingAuth(false);
+                return;
+            }
             try {
                 const res = await fetch(`${API_URL}/profile`, {
-                    credentials: 'include',
+                    headers: { Authorization: `Bearer ${token}` }
                 });
 
                 if (res.ok) {
                     router.push("/");
                 } else {
+                    removeToken();
                     setCheckingAuth(false);
                 }
             } catch (err) {
@@ -51,7 +57,6 @@ export default function LoginPage() {
             const res = await fetch(`${API_URL}/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: 'include',
                 body: JSON.stringify(form),
             });
 
@@ -62,6 +67,7 @@ export default function LoginPage() {
                 return;
             }
 
+            setToken(data.token);
             router.push("/");
             router.refresh();
         } catch (err) {
