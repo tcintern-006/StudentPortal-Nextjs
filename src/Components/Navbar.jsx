@@ -4,7 +4,7 @@ import { coursesData, navbarData } from '@/app/Assets/data'
 import { ButtonComp } from './ButtonComp'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { getToken, removeToken } from '@/app/utils/auth'
+import { getToken, setToken, removeToken } from "@/Components/auth";
 
 export const Navbar = () => {
   const { links, btnText, socials } = navbarData
