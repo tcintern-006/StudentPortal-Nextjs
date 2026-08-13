@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getToken, setToken, removeToken } from "@/app/utils/auth";
+import { getToken, setToken, removeToken } from "@/Components/auth";
 
 export default function LoginPage() {
     const router = useRouter();
