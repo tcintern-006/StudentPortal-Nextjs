@@ -1,9 +1,8 @@
 "use client"
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
 import Link from "next/link";
+import { getToken, setToken, removeToken } from "@/app/utils/auth";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -16,14 +15,20 @@ export default function RegisterPage() {
 
     useEffect(() => {
         async function verifyToken() {
+            const token = getToken();
+            if (!token) {
+                setCheckingAuth(false);
+                return;
+            }
             try {
                 const res = await fetch(`${API_URL}/profile`, {
-                    credentials: 'include', 
+                    headers: { Authorization: `Bearer ${token}` }
                 });
 
                 if (res.ok) {
                     router.push("/");
                 } else {
+                    removeToken();
                     setCheckingAuth(false);
                 }
             } catch (err) {
@@ -34,9 +39,6 @@ export default function RegisterPage() {
 
         verifyToken();
     }, []);
-  
-
-
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -56,7 +58,6 @@ export default function RegisterPage() {
             const res = await fetch(`${API_URL}/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: 'include',  
                 body: JSON.stringify(form),
             });
 
@@ -69,6 +70,7 @@ export default function RegisterPage() {
                 return;
             }
 
+            setToken(data.token);
             router.push("/");
         } catch (err) {
             console.log(err);
@@ -79,12 +81,12 @@ export default function RegisterPage() {
     }
 
     if (checkingAuth) {
-    return (
-        <div className="min-h-screen bg-background flex items-center justify-center">
-            <p className="text-gray-400">Loading...</p>
-        </div>
-    );
-}
+        return (
+            <div className="min-h-screen bg-background flex items-center justify-center">
+                <p className="text-gray-400">Loading...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-background text-foreground px-8  pt-35 md:pt-2 flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
