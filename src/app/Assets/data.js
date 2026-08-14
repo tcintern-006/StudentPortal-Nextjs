@@ -32,6 +32,7 @@ export const navbarData = {
         { name: "Courses", href: "/courses", iconClass: "icon-[lucide--book]" },
         { name: "Instructors", href: "/instructors", iconClass: "icon-[lucide--users]" },
         { name: "Students", href: "/students", iconClass: "icon-[lucide--users]" },
+        { name: "Profile", href: "/profile", iconClass: "icon-[lucide--users]" },
         { name: "About", href: "/about", iconClass: "icon-[lucide--info]" },
         { name: "Contact", href: "/contact", iconClass: "icon-[lucide--phone]" },
     ],

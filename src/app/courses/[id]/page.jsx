@@ -3,6 +3,7 @@ import { coursesData } from "@/app/Assets/data";
 import { CourseCard } from "@/Components/CourseCard";
 import { Cards } from "@/Components/Cards";
 import { SectionTitle } from "@/Components/SectionTitle";
+import { getToken } from "@/Components/auth";
 
 
 
@@ -10,14 +11,16 @@ import { SectionTitle } from "@/Components/SectionTitle";
 
 export default async function page({ params }) {
   const { id } = await params;
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses/${id}`);
+  const token = getToken()
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses/${id}`, {
+    headers: { Authorization: `Bearer ${token}` }
+  });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch course: ${res.status}`);
   }
-
-  const { Course } = await res.json();
+  const data = await res.json();
+  const Course  = data.Course;
 
   if (!Course) notFound();
 

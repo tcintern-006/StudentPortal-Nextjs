@@ -5,7 +5,7 @@ export default function Error({ error, reset }) {
 
 
     return (
-        <div className='w-full flex flex-col gap-4 justify-center items-center py-20 min-h-screen'>
+        <div className='w-full flex flex-col gap-4 justify-center items-center py-20 min-h-screen md:pl-[18%]'>
             <p className='text-lg text-red-500'>Couldn't load this course. Please try again.</p>
             <button
                 onClick={() => reset()}

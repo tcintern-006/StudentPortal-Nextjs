@@ -8,34 +8,63 @@ export const CourseCard = ({data}) => {
 
     
   return (
-    <div className='flex flex-col justify-center items-center gap-3 '>
-        <div className="left  w-[50%] flex flex-col gap-5">
-            <p className='text-amber-800'>CREATE CODE CONQURE</p>
-            <div className='flex flex-col gap-5'>
-                <h1 className='text-3xl'>{obj.title}</h1>
-                <p className='text-[#852a2ab0]'>{obj.description}</p>
+   <div className='w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center'>
+
+        <div className='left flex flex-col gap-5'>
+
+            <p className='text-2xl font-medium tracking-wide text-amber-700'>
+                CREATE CODE CONQURE
+            </p>
+
+            <div className='flex flex-col gap-3'>
+                <h1 className='text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight'>
+                    {obj.title}
+                </h1>
+
+                <p className='text-sm sm:text-base leading-6 text-[#852a2ab0] max-w-xl'>
+                    {obj.description}
+                </p>
             </div>
+
             <div>
-                <h2 className='text-amber-300'>Price: {obj.price}</h2>
+                <h2 className='text-xl sm:text-2xl font-semibold text-amber-500'>
+                    Price: ${obj.price}
+                </h2>
             </div>
-            <div>
-                <ButtonComp text={obj.btn1}/>
-                <ButtonComp text={obj.btn2}/>
+
+            <div className='flex flex-wrap gap-3'>
+                <ButtonComp text={obj.btn1} />
+                <ButtonComp text={obj.btn2} />
             </div>
+
         </div>
-        <div className="right flex  flex-col gap-3 border-2 w-[50%] border-[#8080802f] rounded-lg p-4">
-            <div className="">
-              <Image className='rounded-lg' src={obj.img} alt={obj.title} width={400} height={300} />
+
+        <div className='right w-full border border-[#8080802f] rounded-xl p-4 sm:p-5'>
+
+            <div className='w-full aspect-[4/3] overflow-hidden rounded-lg'>
+                <Image
+                    className='w-full h-full object-cover rounded-lg'
+                    src={obj.img}
+                    alt={obj.title}
+                    width={600}
+                    height={450}
+                />
             </div>
-            <div className="bubbles">
-                   { obj.bubbles.map((e , idx )=>{
-                                        return (
-                                            <span key={idx}  className='border border-[#8080808e] text-[0.6rem] rounded-lg p-1 w-full' >{e}</span>
-                                        )
-                                    })}
+
+            <div className='flex flex-wrap gap-2 mt-4'>
+                {obj.bubbles.map((e, idx) => {
+                    return (
+                        <span key={idx} className='border border-[#8080808e] text-xs rounded-md px-3 py-1.5 text-gray-600'>
+                            {e}
+                        </span>
+                    )
+                })}
             </div>
+
         </div>
 
     </div>
+</div>
   )
 }

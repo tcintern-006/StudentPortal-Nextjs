@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { getToken } from './auth';
 
 export const AddCourse = ({onCourseAdded }) => {
     const router = useRouter();
@@ -44,11 +45,13 @@ export const AddCourse = ({onCourseAdded }) => {
                     .map((b) => b.trim())
                     .filter(Boolean),
             };
-
+          const token = getToken()
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json",  Authorization: `Bearer ${token}` },
                 body: JSON.stringify(payload),
+
+        
             });
 
             if (!res.ok) {

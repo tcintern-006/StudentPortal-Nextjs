@@ -6,7 +6,7 @@ import { getToken, setToken, removeToken } from "@/Components/auth";
 
 export default function RegisterPage() {
     const router = useRouter();
-    const [form, setForm] = useState({ name: "", email: "", password: "" });
+    const [form, setForm] = useState({ name: "", email: "", password: "", role: "" });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [checkingAuth, setCheckingAuth] = useState(true);
@@ -89,12 +89,12 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen bg-background text-foreground px-8  pt-35 md:pt-2 flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
+        <div className=" bg-background text-foreground px-8 mt-[5]  md:mt-[7%] flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
             <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#7F22FE]/20 rounded-full blur-[120px]" />
 
             <div className="relative w-full max-w-md bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text ">
                         Create Account
                     </h1>
                     <p className="text-gray-400 mt-2 text-sm">
@@ -114,7 +114,17 @@ export default function RegisterPage() {
                             className="w-full bg-transparent border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#7F22FE] focus:bg-white/5 transition-all placeholder:text-gray-600"
                         />
                     </div>
-
+                    <div>
+                        <label className="text-sm text-gray-400 mb-1 block">Role</label>
+                        <select
+                            name="role"
+                            value={form.role}
+                            onChange={handleChange}
+                        >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
                     <div>
                         <label className="text-sm text-gray-400 mb-1 block">Email</label>
                         <input

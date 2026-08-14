@@ -1,5 +1,6 @@
 "use client"
 
+import { getToken } from "@/Components/auth";
 import { useState, useEffect } from "react";
 
 export default function StudentsPage() {
@@ -10,7 +11,7 @@ export default function StudentsPage() {
     const [error, setError] = useState("");
     const [submitting, setSubmitting] = useState(false);
     const [deletingId, setDeletingId] = useState(null);
-
+   const token = getToken();
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
     async function fetchStudents() {
@@ -44,7 +45,7 @@ export default function StudentsPage() {
             setSubmitting(true);
             const res = await fetch(`${API_URL}/students`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" , Authorization: `Bearer ${token}`,},
                 body: JSON.stringify({ name, email }),
             });
 
@@ -71,6 +72,7 @@ export default function StudentsPage() {
         try {
             const res = await fetch(`${API_URL}/students/${id}`, {
                 method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (!res.ok) {
@@ -99,13 +101,43 @@ export default function StudentsPage() {
     ];
     const colorFor = (name) => colors[name?.charCodeAt(0) % colors.length];
 
+
+
+    // CHECK IF ITS ADMIN OTHERWISE DISABLE ADDING STUDENTS
+
+    const [role, setRole] = useState('user')
+    const AUTH_URL = process.env.NEXT_PUBLIC_API_URL;
+    useEffect(() => {
+
+        async function checkRole() {
+         
+            if (!token) {
+                return;
+            }
+
+            try {
+                const res = await fetch(`${AUTH_URL}/profile`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                const data = await res.json();
+                setRole(data.user.role)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        checkRole()
+    }, [])
+
+
+
     return (
         <div className="min-h-screen bg-background text-foreground px-8  pt-24 md:pt-2 flex flex-col flex-1 items-center justify-center font-sans md:pl-[16%]">
-     
+
             <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#7F22FE]/20 rounded-full blur-[120px]" />
 
             <div className="relative max-w-5xl mx-auto">
-             
+
                 <div className="text-center mb-4">
                     <span className="inline-block text-xs tracking-widest uppercase text-[#7F22FE] font-semibold mb-3">
                         Portal
@@ -118,33 +150,38 @@ export default function StudentsPage() {
                     </p>
                 </div>
 
-              
-                <form
-                    onSubmit={handleSubmit}
-                    className="max-w-2xl mx-auto mt-10 mb-14 flex flex-col md:flex-row gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
-                >
-                    <input
-                        type="text"
-                        placeholder="Student name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="flex-1 bg-transparent border border-transparent rounded-xl px-4 py-3 outline-none focus:border-[#7F22FE] focus:bg-white/5 transition-all placeholder:text-gray-500"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Student email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="flex-1 bg-transparent border border-transparent rounded-xl px-4 py-3 outline-none focus:border-[#7F22FE] focus:bg-white/5 transition-all placeholder:text-gray-500"
-                    />
-                    <button
-                        type="submit"
-                        disabled={submitting}
-                        className="bg-gradient-to-r from-[#7F22FE] to-[#B14EFF] hover:shadow-[0_0_25px_rgba(127,34,254,0.5)] transition-all duration-300 text-white font-medium px-6 py-3 rounded-xl disabled:opacity-50 disabled:hover:shadow-none whitespace-nowrap"
+
+                {role == 'admin' &&
+                    <form
+
+                        onSubmit={handleSubmit}
+                        className="max-w-2xl mx-auto mt-10 mb-14 flex flex-col md:flex-row gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
                     >
-                        {submitting ? "Adding..." : "+ Add Student"}
-                    </button>
-                </form>
+                        <input
+                            type="text"
+                            placeholder="Student name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            className="flex-1 bg-transparent border border-transparent rounded-xl px-4 py-3 outline-none focus:border-[#7F22FE] focus:bg-white/5 transition-all placeholder:text-gray-500"
+                        />
+                        <input
+                            type="email"
+                            placeholder="Student email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="flex-1 bg-transparent border border-transparent rounded-xl px-4 py-3 outline-none focus:border-[#7F22FE] focus:bg-white/5 transition-all placeholder:text-gray-500"
+                        />
+                        <button
+                            type="submit"
+                            disabled={submitting}
+                            className="bg-gradient-to-r from-[#7F22FE] to-[#B14EFF] hover:shadow-[0_0_25px_rgba(127,34,254,0.5)] transition-all duration-300 text-white font-medium px-6 py-3 rounded-xl disabled:opacity-50 disabled:hover:shadow-none whitespace-nowrap"
+                        >
+                            {submitting ? "Adding..." : "+ Add Student"}
+                        </button>
+                    </form>
+                }
+
+
 
                 {error && (
                     <p className="text-center text-red-400 text-sm mb-8 bg-red-500/10 border border-red-500/20 rounded-lg py-2 max-w-md mx-auto">
@@ -152,7 +189,7 @@ export default function StudentsPage() {
                     </p>
                 )}
 
-             
+
                 {loading ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {[...Array(6)].map((_, i) => (
@@ -168,17 +205,19 @@ export default function StudentsPage() {
                         {students.map((student) => (
                             <div
                                 key={student.id}
-                                className={`group relative border border-white/10 rounded-2xl p-5 bg-white/[0.03] backdrop-blur-sm transition-all duration-300 hover:border-[#7F22FE]/50 hover:shadow-[0_0_25px_rgba(127,34,254,0.15)] hover:-translate-y-1 ${
-                                    deletingId === student.id ? "opacity-0 scale-95" : "opacity-100 scale-100"
-                                }`}
+                                className={`group relative border border-white/10 rounded-2xl p-5 bg-white/[0.03] backdrop-blur-sm transition-all duration-300 hover:border-[#7F22FE]/50 hover:shadow-[0_0_25px_rgba(127,34,254,0.15)] hover:-translate-y-1 ${deletingId === student.id ? "opacity-0 scale-95" : "opacity-100 scale-100"
+                                    }`}
                             >
-                                <button
-                                    onClick={() => handleDelete(student.id)}
-                                    className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100"
-                                    aria-label="Delete student"
-                                >
-                                    ✕
-                                </button>
+                                {
+                                    role == 'admin' &&
+                                    <button
+                                        onClick={() => handleDelete(student.id)}
+                                        className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full text-gray-500 hover:text-red-400 hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100"
+                                        aria-label="Delete student"
+                                    >
+                                        ✕
+                                    </button>
+                                }
 
                                 <div className="flex items-center gap-3">
                                     <div

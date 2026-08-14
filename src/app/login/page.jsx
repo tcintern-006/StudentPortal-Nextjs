@@ -92,7 +92,7 @@ export default function LoginPage() {
 
             <div className="relative w-full max-w-md bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text ">
                         Welcome Back
                     </h1>
                     <p className="text-gray-400 mt-2 text-sm">
